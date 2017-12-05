@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Console_Application
 {
@@ -10,10 +11,9 @@ namespace Console_Application
         
         public static void Main(string[] args)
         {
-            foreach (string s in OpenInputFile(FileLocation))
-            {
-                Console.WriteLine(s);
-            }
+            CPUJumper cpuJumper = new CPUJumper(OpenInputFile(FileLocation).Select(int.Parse).ToList());
+            
+            Console.WriteLine(cpuJumper.ResolveJumpTable());
         }
 
         private static IEnumerable<string> OpenInputFile(string relativeFileLocation)
